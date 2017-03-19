@@ -9,4 +9,4 @@ define("USER", "root");
 
 define("PASS", "");
 
-define("DB_NAME", "Database");
+define("DB_NAME", "kanban");
