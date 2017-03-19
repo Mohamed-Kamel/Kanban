@@ -11,30 +11,34 @@ class Task {
     }
 
     // insert data in tasks table
-    function insert( $user_id,$data) {
+    function insert($user_id,$data) {
 
         $title = $data['title'];
-        $description = $data['`description'];
-        $sql = " INSERT INTO `tasks`(`title`,`description`,`user_id`) VALUES ( $description,$data,$user_id)";
+        $description = $data['description'];
+
+        $sql = "INSERT INTO tasks SET title='$title',
+         description = '$description',
+         user_id = $user_id";
         //return boolean
         return $this->db->booleanQuery($sql);
+
     }
 
     // update data in tasks table
     function update($data) {
 
-        $id = $data['id'];
+        $id = $data['task_id'];
         $title = $data['title'];
         $description = $data['`description'];
         $status = $data['status'];
 
-        $sql = " UPDATE `tasks` `title`=$title,`description`=$description,status`=$status  where  id=$id";
+        $sql = "UPDATE `tasks` `title`=$title,`description`=$description,status`=$status  where  task_id=$id";
         return $this->db->booleanQuery($sql);
     }
 
     // delete data in tasks table
     function delete($id) {
-        $sql = "DELETE FROM `tasks` WHERE id=$id";
+        $sql = "DELETE FROM `tasks` WHERE task_id=$id";
         return $this->db->booleanQuery($sql);
     }
 

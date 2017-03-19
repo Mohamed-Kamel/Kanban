@@ -2,12 +2,32 @@
 
 require_once("../Models/Task.php");
 
+echo "<pre>";
+
 session_start();
 
-$_SESSION['user_id'] = "1";
+$_SESSION["user_id"] = 1;
 
 
+$task = new TasksController();
 
+// $task->getUserTasks();
+
+// $task->addNewTask([
+// 	"title" => "Test Controller",
+// 	"description" => "Test Controller"
+// 	]);
+
+
+// $task->deleteTaskById(5);
+
+
+$task->editTaskById([
+	"task_id" => 4,
+	"title" => "Hamada",
+	"description" => "Awad",
+	"status" => "done"
+	]);
 
 class TasksController{
 
@@ -15,10 +35,10 @@ class TasksController{
 	//object from the Task model
 	private $taskModel;
 	private $errors = [];
-	private $userId = $_SESSION["user_id"];
 	private $id_pattern = "/[0-9]+/";
-	private $string_pattern = "/[a-z0-9_.-@#%*]+/i";
+	private $string_pattern = "/[a-z0-9_.\-:@#%&'\" ,! \t()\n]+/i";
 	private $status_pattern = "/(new|doing|done|testing)/";
+	private $userId;
 
 	//validation patterns
 
@@ -30,6 +50,7 @@ class TasksController{
 	
 	public function __construct(){
 		
+		$this->userId = $_SESSION["user_id"];
 		$this->taskModel = new Task();
 	
 	}
@@ -46,7 +67,7 @@ class TasksController{
 
 		
 		//validate userId
-		if(!$this->validate_input($this->id_pattern) || $this->userId < 1){
+		if(!$this->validate_input($this->id_pattern, $this->userId) || $this->userId < 1){
 			//return errors message and die
 			$this->errors[] = "invalid user id";
 		}
@@ -80,12 +101,12 @@ class TasksController{
 
 		//validate data
 
-		if(!$this->validate_input($this->string_pattern, $title){
+		if(!$this->validate_input($this->string_pattern, $title)){
 			//return errors title not valid in json and die
 			$this->errors[] = "Enter a valid title";
 		}
 
-		if(!$this->validate_input($this->string_pattern), $desc){
+		if(!$this->validate_input($this->string_pattern, $desc)){
 			//return errors desc not valid json
 			$this->errors[]  = "Enter a valid description";
 		}
@@ -164,7 +185,7 @@ class TasksController{
 		$desc = $data["description"];
 		$status = $data["status"];
 
-		if(!$this->validate_input($taskId)){
+		if(!$this->validate_input($this->id_pattern, $taskId)){
 			$this->errors[] = "TaskId not valid";
 		}
 
@@ -172,7 +193,7 @@ class TasksController{
 			$this->errors[] = "Enter a valid title";
 		}
 	
-		if(!$this->validate_input($this->string_pattern, $description)){
+		if(!$this->validate_input($this->string_pattern, $desc)){
 			$this->errors[] = "Enter a valid description";
 		}
 	
