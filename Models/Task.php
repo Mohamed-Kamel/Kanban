@@ -1,4 +1,4 @@
-<?php
+]<?php
 
 require_once "Model.php";
 
@@ -23,12 +23,12 @@ class Task {
     // update data in tasks table
     function update($data) {
 
-        $id = $data['id'];
+        $id = $data['task_id'];
         $title = $data['title'];
         $description = $data['`description'];
         $status = $data['status'];
 
-        $sql = " UPDATE `tasks` `title`=$title,`description`=$description,status`=$status  where  id=$id";
+        $sql = "UPDATE `tasks` set `title`=$title,`description`=$description,status`=$status  where  `task_id`=$id";
         return $this->db->booleanQuery($sql);
     }
 
@@ -42,9 +42,19 @@ class Task {
 
     function select($user_id) {
         $sql = " SELECT * FROM tasks where user_id=$user_id";
-
         $values = $this->db->selectQuery($sql);
         return $values;
+    }
+    
+    function  ensure($user_id,$task_id){
+        $sql=" SELECT * FROM tasks where user_id=$user_id AND task_id=$task_id";
+         $values = $this->db->selectQuery($sql);
+         if($values){
+             return TRUE;
+         } else {
+             return FALSE;    
+         }
+        
     }
 
 }
