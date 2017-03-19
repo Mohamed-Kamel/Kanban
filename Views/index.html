@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title></title>
+
+        <!-- CSS FILES -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <!--START HEADER-->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://getbootstrap.com/examples/theme/#">Bootstrap theme</a>
+                </div>
+            </div>
+        </nav>
+        <!--END HEADER-->
+
+
+
+
+        <div class="wrapper">
+            <!--START CONTENT PAGE-->
+            <div class="">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="div-tasks-block">
+                            <h1 class="new-tasks">
+                                New Tasks
+                                <button class="add-task" data-toggle="modal" data-target="#newTask"><i class="fa fa-plus-square"></i></button>
+                            </h1>
+                            <div id="newTask" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Add New Task</h4>
+                                        </div>
+                                        <form name="addTask" method="post">
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-md-2 col-form-label">Task Title</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text" placeholder="Tak Title">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="example-text-input" class="col-md-2 col-form-label">Task Content</label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" placeholder="Task Content"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">ADD</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!--START TASK BLOCK-->
+                            <div class="task-block">
+                                <h2 class="task-block-header">
+                                    Task Title 
+                                    <button class="delete-task" data-toggle="modal" data-target="#deleteTask"><i class="fa fa-times"></i></button>
+                                </h2>
+                                <p class="task-block-content">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                </p>
+                                <div id="deleteTask" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p>Are You sure You want to Delete This Task</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--START TASK BLOCK-->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="div-tasks-block">
+                            <h1 class="new-tasks">
+                                 Tasks in progress
+                            </h1>
+                            <!--START TASK BLOCK-->
+                            <div class="task-block">
+                                <h2 class="task-block-header">
+                                    Task Title 
+                                    <button class="delete-task" data-toggle="modal" data-target="#deleteTask"><i class="fa fa-times"></i></button>
+                                </h2>
+                                <p class="task-block-content">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                </p>
+                                <div id="deleteTask" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p>Are You sure You want to Delete This Task</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--START TASK BLOCK-->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="div-tasks-block">
+                            <h1 class="new-tasks">
+                                 Tasks Revision Test
+                            </h1>
+                            <!--START TASK BLOCK-->
+                            <div class="task-block">
+                                <h2 class="task-block-header">
+                                    Task Title 
+                                    <button class="delete-task" data-toggle="modal" data-target="#deleteTask"><i class="fa fa-times"></i></button>
+                                </h2>
+                                <p class="task-block-content">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                </p>
+                                <div id="deleteTask" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p>Are You sure You want to Delete This Task</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--START TASK BLOCK-->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="div-tasks-block">
+                            <h1 class="new-tasks">
+                                 Done Tasks
+                            </h1>
+                            <!--START TASK BLOCK-->
+                            <div class="task-block">
+                                <h2 class="task-block-header">
+                                    Task Title 
+                                    <button class="delete-task" data-toggle="modal" data-target="#deleteTask"><i class="fa fa-times"></i></button>
+                                </h2>
+                                <p class="task-block-content">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                </p>
+                                <div id="deleteTask" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p>Are You sure You want to Delete This Task</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--START TASK BLOCK-->
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            <!--END CONTENT PAGE-->
+        </div>
+
+
+
+
+        <!--JAVASCRIPT FILES-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+
+
+    </body>
+</html>
