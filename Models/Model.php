@@ -1,33 +1,42 @@
 <?php
 
-require_once("../Includes/config.php");
+class model {
 
-/**
-* abstract class Model the generic to all model classes
-*/
-abstract class Model{
-	
-	//connection 
-	private $conn;
+    
+     // loacal host conect data
+    
+    private $hostname = 'localhost';
+    private $username = 'root';
+    private $pass = '';
+    private $database = 'kanban';
+    private $globalCon;
 
-	/**
-	 *
-	 * Constructor to open connection with the database
-	 *
-	 */
-	
-	function __construct(){
-		$this->conn = mysqli_connect(HOST, USER, PASS, DB_NAME);
-	}
+    // get link to database connection 
+    private function connect() {
+        $this->globalCon = new mysqli($this->hostname, $this->username, $this->pass, $this->database);
+        if ($this->globalCon->connect_error)
+            die($this->globalCon->connect_error);
+    }
 
+    // insert update delete 
+    function booleanQuery($sql) {
+        $this->connect();
+        $result = $this->globalCon->query($sql) or die($this->globalCon->error);
+        $this->globalCon->close();
+        return $result;
+    }
+    
+    // select from data base 
 
-	/**
-	 *
-	 * Destructor to close connection with the database
-	 *
-	 */
-	
-	function __destruct(){
-		$this->conn->close();
-	}
+    function selectQuery($sql) {
+        $this->connect();
+        $result = $this->globalCon->query($sql) or die($this->globalCon->error);
+        $data = null;
+        if ($result->num_rows > 0)
+            while ($row = $result->fetch_assoc())
+                $data[] = $row;
+        $this->globalCon->close();
+        return $data;
+    }
+
 }
