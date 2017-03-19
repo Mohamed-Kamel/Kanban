@@ -29,10 +29,13 @@ class Task {
 
         $id = $data['task_id'];
         $title = $data['title'];
-        $description = $data['`description'];
+        $description = $data['description'];
         $status = $data['status'];
 
-        $sql = "UPDATE `tasks` set `title`=$title,`description`=$description,status`=$status  where  `task_id`=$id";
+        $sql = "UPDATE tasks SET title='$title',
+                        description='$description',
+                        status='$status' 
+                        where task_id=$id";
 
         return $this->db->booleanQuery($sql);
     }

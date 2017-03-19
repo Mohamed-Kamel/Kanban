@@ -26,7 +26,7 @@ $task->editTaskById([
 	"task_id" => 4,
 	"title" => "Hamada",
 	"description" => "Awad",
-	"status" => "done"
+	"status" => "doing"
 	]);
 
 class TasksController{
@@ -121,7 +121,7 @@ class TasksController{
 			
 			if($result){
 			
-				echo  json_encode($this->getUserTasks());
+				$this->getUserTasks();
 			
 			}else{
 			
@@ -156,7 +156,7 @@ class TasksController{
 			
 			if($this->taskModel->delete($taskId)){
 			
-				echo  json_encode($this->getUserTasks());
+				$this->getUserTasks();
 			
 			}else{
 			
@@ -215,7 +215,7 @@ class TasksController{
 
 				if($result){
 
-					echo  json_encode($this->getUserTasks());
+					$this->getUserTasks();
 
 				}else{
 
