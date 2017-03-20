@@ -17,8 +17,10 @@ class User {
         $password = $data['password'];
         $image = $data['image'];
 
-        $sql = " INSERT INTO `users`(`username`, `email`, `password`, `image`) VALUES"
-                . "( $user_name,$email,$password,$image)";
+        $sql = "INSERT INTO users SET username='$user_name', 
+                                        email = '$email',
+                                        password = '$password',
+                                        image = '$image'";
 
         //return boolean 
         return $this->db->booleanQuery($sql);
@@ -49,9 +51,10 @@ class User {
 
     
     // select user by id ;
-    function select($id) {
-
-        $sql = "select * from users where user_id=$id";
+    function select($data) {
+        $username = $data["username"];
+        $password = $data["password"];
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
         return $this->db->selectQuery($sql);
     }
 

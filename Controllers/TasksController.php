@@ -6,7 +6,7 @@ session_start();
 $_SESSION["user_id"] = 1;
 
 
-class TasksController
+class TasksController extends Controller
 {
 
 
@@ -18,14 +18,11 @@ class TasksController
     private $status_pattern = "/(new|doing|done|testing)/";
     private $userId;
 
-    //validation patterns
 
     /**
-     *
-     * Constructor to instantiate the models
+     * TasksController constructor.
      *
      */
-
     public function __construct()
     {
 
@@ -34,18 +31,12 @@ class TasksController
 
     }
 
-    /**
-     *
-     * function to get all tasks to the current user
-     *
-     * returns a json response to the front end
-     *
-     */
 
+    /**
+     * Method to show all tasks to specific user
+     */
     public function getUserTasks()
     {
-
-
         //validate userId
         if (!$this->validate_input($this->id_pattern, $this->userId) || $this->userId < 1) {
             //return errors message and die
@@ -53,27 +44,23 @@ class TasksController
         }
 
         if (count($this->errors) > 0) {
-
             echo json_encode($this->errors);
-
+            return;
         } else {
             //query by user id
             $result = $this->taskModel->select($this->userId);
             $result = $this->categoize($result);
             //send it to the fornt-end to draw it
             echo json_encode($result);
-
-            // print_r(json_encode($result));
+            return;
         }
     }
 
 
     /**
-     *
-     * Add new task by user id
-     *    return json by errors or data
+     * Method to add new task
+     * @param $data
      */
-
     public function addNewTask($data)
     {
         //data is a post request $_POST
@@ -83,9 +70,10 @@ class TasksController
 
 
         //if any attribute is empty don't insert it
-        if(empty($title) || empty($desc)){
-                echo json_encode("Empty title or description");
-                return;
+        if (empty($title) || empty($desc)) {
+            $this->errors[] = "Empty title or description";
+            echo json_encode($this->errors);
+            return;
         }
 
         //validate data
@@ -103,57 +91,48 @@ class TasksController
         if (count($this->errors) > 0) {
 
             echo json_encode($this->errors);
-
+            return;
         } else {
 
             $result = $this->taskModel->insert($this->userId, $data);
 
             if ($result) {
-
-//                $this->getUserTasks();
                 echo json_decode(true);
+                return;
             } else {
-
                 $this->errors[] = "Database errors can't add new task";
-
                 echo json_encode($this->errors);
-
+                return;
             }
         }
     }
 
 
     /**
-     *
-     * Delete task by id
-     * return json response with error or data
+     * Delete task by taskid and userid
+     * @param $taskId
      */
-
     public function deleteTaskById($taskId)
     {
 
         //validate taskid
-
         if (!$this->validate_input($this->id_pattern, $taskId)) {
             $this->errors[] = "Invalid Task id";
         }
 
         if (count($this->errors) > 0) {
 
-            echo json_encode($errors);
-
+            echo json_encode($this->errors);
+            return;
         } else {
 
             if ($this->taskModel->delete($taskId)) {
-
-//                $this->getUserTasks();
                 echo json_decode(true);
+                return;
             } else {
-
                 $this->errors[] = "Database error Can't delete task";
-
                 echo json_encode($this->errors);
-
+                return;
             }
         }
 
@@ -161,12 +140,9 @@ class TasksController
 
 
     /**
-     *
-     * Edit task content and status
-     * Returns all data
-     *
+     * Edit Task by its id
+     * @param $data
      */
-
     public function editTaskById($data)
     {
 
@@ -178,9 +154,9 @@ class TasksController
 
 
         //if any attribute is empty don't insert it
-        if(empty($title) || empty($desc)){
-                echo json_encode("Empty title or description");
-                return;
+        if (empty($title) || empty($desc)) {
+            echo json_encode("Empty title or description");
+            return;
         }
 
 
@@ -212,8 +188,6 @@ class TasksController
                 $result = $this->taskModel->update($data);
 
                 if ($result) {
-
-//                    $this->getUserTasks();
                     echo json_decode(true);
                 } else {
 
@@ -231,14 +205,13 @@ class TasksController
 
 
     /**
-     *
-     * Divide the tasks by categories
-     *
+     * Divide the tasks to categories
+     * @param $data
+     * @return array
      */
-
     public function categoize($data)
     {
-        $result = [];
+
         $new = [];
         $doing = [];
         $testing = [];
@@ -267,17 +240,6 @@ class TasksController
         ];
 
         return $result;
-    }
-
-    /**
-     *
-     * Method to validate inputs by patterns
-     *
-     */
-
-    public function validate_input($pattern, $input)
-    {
-        return preg_match($pattern, $input);
     }
 
 }
