@@ -1,0 +1,45 @@
+.wrapper{
+    padding: 60px 20px;
+}
+.div-tasks-block {
+    border-left: 1px solid #dedede;
+    border-right: 1px solid #dedede;
+    min-height: 500px;
+    /*padding: 10px;*/
+}
+.div-tasks-block  h1 {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-size: 24px;
+    padding: 10px 0;
+    text-transform: uppercase;
+    position: relative
+}
+.task-block {
+    margin: 20px;
+    border: 1px solid #f8f7b6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.19);
+}
+.task-block-header{
+    margin: 0;
+    padding: 7px;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: #f8f7b6;
+    color: #333;
+    position: relative;
+    padding-right: 40px;
+}
+.delete-task, .add-task {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+}
+.task-block-content {
+    padding: 5px;
+    background-color: #fcfaae;
+    margin: 0;
+    min-height: 120px;
+}
