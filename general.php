@@ -7,9 +7,10 @@ require_once("./Controllers/Controller.php");
 require_once("./Controllers/TasksController.php");
 require_once("./Controllers/UsersController.php");
 
-
+session_start();
 $task = new TasksController();
 $user = new UsersController();
+
 
 // Show all tasks to specific user
 if (isset($_POST["submit"]) && $_POST["submit"] == "show") {
@@ -37,3 +38,11 @@ if(isset($_POST["login"])) {
 if(isset($_POST["signup"])){
     $user->signup($_POST);
 }
+
+if(isset($_POST["isLogged"])){
+    if(isset($_SESSION["user_id"])){
+        echo json_encode(true);
+        return;
+    }
+}
+

@@ -15,12 +15,10 @@ class User {
         $user_name = $data['username'];
         $email = $data['email'];
         $password = $data['password'];
-        $image = $data['image'];
 
         $sql = "INSERT INTO users SET username='$user_name', 
                                         email = '$email',
-                                        password = '$password',
-                                        image = '$image'";
+                                        password = '$password'";
 
         //return boolean 
         return $this->db->booleanQuery($sql);

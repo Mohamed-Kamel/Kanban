@@ -1,7 +1,7 @@
 <?php
 
 
-session_start();
+
 
 $_SESSION["user_id"] = 1;
 
@@ -25,10 +25,13 @@ class TasksController extends Controller
      */
     public function __construct()
     {
-
-        $this->userId = $_SESSION["user_id"];
-        $this->taskModel = new Task();
-
+        if(isset($_SESSION["user_id"])){
+            $this->userId = $_SESSION["user_id"];
+            $this->taskModel = new Task();
+        }else{
+            echo json_encode(false);
+            return;
+        }
     }
 
 
