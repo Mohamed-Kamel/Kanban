@@ -52,6 +52,7 @@ class UsersController extends Controller
         if (count($this->errors) > 0) {
             return $this->errors;
         } else {
+            $data["password"] = $this->hashEncryption($password);
             $result = $this->userModel->insert($data);
             if ($result === true) {
                 return true;
@@ -70,9 +71,6 @@ class UsersController extends Controller
     {
         $this->errors = [];
         $username = $data["username"];
-        /**
-         * todo : encrypt the password
-         */
         $password = $data["password"];
 
         if (empty($username) || empty($password)) {
@@ -87,7 +85,10 @@ class UsersController extends Controller
         if (count($this->errors) > 0) {
             return $this->errors;
         }
+        $data["password"] = $this->hashEncryption($password);
+
         $row = $this->userModel->select($data);
+
         if (count($row) > 0) {
             $_SESSION["user_id"] = $row[0]["user_id"];
             return true;
@@ -95,6 +96,15 @@ class UsersController extends Controller
             $this->errors[] = "Enter valid username or password";
             return $this->errors;
         }
+    }
+
+    /**
+     * Method to encrypt the password
+     * @param $string
+     * @return string
+     */
+    public function hashEncryption($string){
+        return sha1($string);
     }
 
 }
