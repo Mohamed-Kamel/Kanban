@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2017 at 06:15 م
+-- Generation Time: Mar 23, 2017 at 07:25 م
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -45,7 +45,7 @@ CREATE TABLE `users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `username` varchar(100) NOT NULL,
   `email` varchar(40) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
+  `password` varchar(200) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -75,7 +75,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `task_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `task_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
