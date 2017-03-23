@@ -454,7 +454,7 @@ if(!isset($_SESSION["user_id"])){
                                 to = 4;
                             }
 
-                            if (Math.abs(from - to) <= 1) {
+                            if (Math.abs(from - to) == 1) {
                                 $.ajax({
                                     method: "POST",
                                     data: {
@@ -470,7 +470,8 @@ if(!isset($_SESSION["user_id"])){
 
                                 }).fail(function (error) {
                                 });
-                            } else {
+                            }else if(Math.abs(from - to) == 0){
+			    }else {
                                 $("#errorMoving").show();
 
                             }
