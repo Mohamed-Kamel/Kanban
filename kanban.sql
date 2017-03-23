@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2017 at 11:39 م
+-- Generation Time: Mar 23, 2017 at 06:15 م
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Database`
+-- Database: `kanban`
 --
 
 -- --------------------------------------------------------
@@ -31,8 +31,8 @@ CREATE TABLE `tasks` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `title` varchar(250) DEFAULT NULL,
   `description` text,
-  `created` datetime DEFAULT NULL,
-  `status` enum('new','in_progress','done','revision_test') DEFAULT 'new'
+  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('new','doing','done','testing') DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -43,11 +43,11 @@ CREATE TABLE `tasks` (
 
 CREATE TABLE `users` (
   `user_id` int(11) UNSIGNED NOT NULL,
-  `username` varchar(50) DEFAULT NULL,
+  `username` varchar(100) NOT NULL,
   `email` varchar(40) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Indexes for dumped tables
@@ -64,7 +64,8 @@ ALTER TABLE `tasks`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables

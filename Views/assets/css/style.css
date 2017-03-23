@@ -1,19 +1,35 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track-piece  {
+    background-color: #f5f5f5;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color: #01b7f2;
+}
+
 .wrapper{
     padding: 60px 20px;
 }
 .div-tasks-block {
-    border-left: 1px solid #dedede;
-    border-right: 1px solid #dedede;
-    min-height: 500px;
-    /*padding: 10px;*/
+    border: 1px solid #dedede;
+    margin: 20px 0;
+}
+.drag{
+    height: 430px;
+    overflow-y: scroll;
 }
 .div-tasks-block  h1 {
-    background-color: #f1f1f1;
+    background-color: #f5f5f5;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     padding: 10px 0;
     text-transform: uppercase;
-    position: relative
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .task-block {
     margin: 20px;
@@ -24,24 +40,70 @@
     margin: 0;
     padding: 7px;
     font-size: 18px;
-    text-transform: uppercase;
     background-color: #f8f7b6;
     color: #333;
     position: relative;
-    padding-right: 40px;
+    padding-right: 60px;
 }
-.delete-task, .add-task {
+.delete-task, .add-task, .edit-task {
     position: absolute;
     top: 5px;
     right: 10px;
     background-color: transparent;
     border: none;
+    font-size: 16px;
+}
+.delete-task{
+    color: #eb0000;
+}
+.edit-task {
+    right: 30px;
+    color: #FF9800;
+    top: 7px;
+}
+.add-task{
+    color: #01b7f2;
+    top: 10px;
+    font-size: 22px;
+}
+button:focus{
+    outline: 0;
 }
 .task-block-content {
     padding: 5px;
     background-color: #fcfaae;
     margin: 0;
     min-height: 120px;
+}
+#doing .task-block-header{
+    background-color: #c9ecf8;
+    padding-right: 10px;
+}
+#doing .task-block {
+    border: 1px solid #c9ecf8;
+}
+#doing .task-block-content {
+    background-color: #c5e4f6;
+}
+#testing .task-block-header{
+    background-color: #c5f7c1;
+    padding-right: 10px;
+}
+#testing .task-block {
+    border: 1px solid #c5f7c1;
+}
+#testing .task-block-content {
+    background-color: #bbefb7;
+}
+#done .task-block-header{
+    background-color: #d4cdf3;
+    padding-right: 10px;
+}
+#done .task-block {
+    border: 1px solid #d4cdf3;
+}
+#done .task-block-content {
+    background-color: #d2c9fe;
 }
 
 /******************
@@ -130,38 +192,83 @@
     background-color: #2a80be;
     border: 1px solid #2a80be;
 }
-.forgot-password {
-    text-decoration: underline !important;
-    color: #888;
+.navbar-brand>img {
+    height: 40px;
 }
-.forgot-password:hover,
-.forgot-password:focus {
-    text-decoration: underline;
-    color: #666;
+.header-logout {
+    float: right;
 }
-.edit-profile label {
-    font-weight:600;
-    margin-bottom: 10px;
-    display: block;
+.navbar-brand {
+    float: left;
+    height: auto; 
+    padding: 10px 15px;
 }
-.edit-profile p {
-    padding-bottom: 0;
+.header-logout {
+    float: right;
+}
+.header-logout button{
+    background-color: red;
+    color: #fff;
+}
+.header-logout button {
+    background-color: #01b7f2;
+    color: #fff;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 2px;
+}
+.header-logout button {
+    background-color: #01b7f2;
+    color: #fff;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 2px;
+    margin: 13px 0;
+}
+.btn-default{
+    background-color: #01b7f2;
+    border: #01b7f2;
+    color: #fff;
+}
+.btn-default:hover{
+    background-color: #01b7f2;
+    border: #01b7f2;
+    color: #fff;
+    opacity: 0.6;
+}
+textarea{
+    resize: none;
+    height: 100px !important;
+}
+input:focus,textarea:focus{
+    border: 1px solid #01b7f2 !important;
+    outline: none !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    box-shadow: 0 !important;
+}
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #01b7f2;
+    color: #fff;
+}
+.modal-header .close{
+    color: #fff;
+    opacity: 1;
+}
+.modal-body p{
+    font-size: 16px;
+    font-weight: bold;
+}
+#errorMoving{
+    opacity: 1;
+}
+#errorMoving .modal-header{
+    background-color: #eb0000;
 }
 
-.edit-profile textarea {
-    height: 150px !important;
-}
-.question-answer p {
-    padding-left: 40px;
-}
-.question-answer h4 {
-    padding-left: 40px;
-    font-weight: 600;
-}
-.question-answer i {
-    margin-top: 4px;
-    font-size: 24px;
-    display: inline-block;
-    position: relative;
-}
 
+#signup-error{
+    display: none;
+}

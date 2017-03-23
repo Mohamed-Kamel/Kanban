@@ -2,10 +2,6 @@
 
 
 
-
-$_SESSION["user_id"] = 1;
-
-
 class TasksController extends Controller
 {
 
@@ -28,9 +24,6 @@ class TasksController extends Controller
         if(isset($_SESSION["user_id"])){
             $this->userId = $_SESSION["user_id"];
             $this->taskModel = new Task();
-        }else{
-            echo json_encode(false);
-            return;
         }
     }
 
@@ -47,15 +40,19 @@ class TasksController extends Controller
         }
 
         if (count($this->errors) > 0) {
+//            return $this->errors;
             echo json_encode($this->errors);
-            return;
         } else {
             //query by user id
             $result = $this->taskModel->select($this->userId);
-            $result = $this->categoize($result);
-            //send it to the fornt-end to draw it
-            echo json_encode($result);
-            return;
+            if(count($result) > 0) {
+                $result = $this->categoize($result);
+                //send it to the fornt-end to draw it
+                echo json_encode($result);
+//            return $result;
+            }else{
+                echo json_encode(false);
+            }
         }
     }
 
@@ -76,7 +73,7 @@ class TasksController extends Controller
         if (empty($title) || empty($desc)) {
             $this->errors[] = "Empty title or description";
             echo json_encode($this->errors);
-            return;
+            exit;
         }
 
         //validate data
@@ -94,18 +91,15 @@ class TasksController extends Controller
         if (count($this->errors) > 0) {
 
             echo json_encode($this->errors);
-            return;
         } else {
 
             $result = $this->taskModel->insert($this->userId, $data);
 
             if ($result) {
-                echo json_decode(true);
-                return;
+                echo json_encode(true);
             } else {
                 $this->errors[] = "Database errors can't add new task";
                 echo json_encode($this->errors);
-                return;
             }
         }
     }
@@ -124,18 +118,14 @@ class TasksController extends Controller
         }
 
         if (count($this->errors) > 0) {
-
-            echo json_encode($this->errors);
-            return;
+            return $this->errors;
         } else {
 
             if ($this->taskModel->delete($taskId)) {
-                echo json_decode(true);
-                return;
+                return true;
             } else {
                 $this->errors[] = "Database error Can't delete task";
-                echo json_encode($this->errors);
-                return;
+                return $this->errors;
             }
         }
 
@@ -158,8 +148,8 @@ class TasksController extends Controller
 
         //if any attribute is empty don't insert it
         if (empty($title) || empty($desc)) {
-            echo json_encode("Empty title or description");
-            return;
+            $this->errors[] = "Empty title or description";
+            return $this->errors;
         }
 
 
@@ -182,7 +172,7 @@ class TasksController extends Controller
 
         if (count($this->errors) > 0) {
 
-            echo json_encode($this->errors);
+            return $this->errors;
 
         } else {
 
@@ -191,7 +181,7 @@ class TasksController extends Controller
                 $result = $this->taskModel->update($data);
 
                 if ($result) {
-                    echo json_decode(true);
+                    return true;
                 } else {
 
                     $this->errors[] = "Database error can't edit this task";

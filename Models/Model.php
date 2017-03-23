@@ -21,7 +21,7 @@ class model {
     // insert update delete 
     function booleanQuery($sql) {
         $this->connect();
-        $result = $this->globalCon->query($sql) or die($this->globalCon->error);
+        $result = $this->globalCon->query($sql) or $this->globalCon->error;
         $this->globalCon->close();
         return $result;
     }

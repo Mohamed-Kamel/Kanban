@@ -11,7 +11,7 @@ class UsersController extends Controller
 
     private $userModel;
     private $id_pattern = "/[0-9]+/";
-    private $string_pattern = "/[a-z0-9_.\-:@#%&'\",! \t()\n]+/i";
+    private $string_pattern = "/^[a-z]+/i";
     private $errors = [];
 
     public function __construct()
@@ -25,17 +25,17 @@ class UsersController extends Controller
      */
     public function signup($data)
     {
+        $this->errors = [];
         $username = $data["username"];
         $email = $data["email"];
         /**
          * todo : Encrypt the password
          */
         $password = $data["password"];
+        $confirm_password = $data["confirm_password"];
 
         if (empty($username) || empty($email) || empty($password)) {
             $this->errors[] = "Empty username, email or password";
-            echo json_encode($this->errors);
-            return;
         }
 
         if (!$this->validate_input($this->string_pattern, $username)) {
@@ -45,17 +45,19 @@ class UsersController extends Controller
             $this->errors[] = "Enter a valid email";
         }
 
+        if($password != $confirm_password){
+            $this->errors[] = "Enter typical password";
+        }
+
         if (count($this->errors) > 0) {
-            echo json_encode($this->errors);
-            return;
+            return $this->errors;
         } else {
-            if ($this->userModel->insert($data)) {
-                echo json_encode(true);
-                return;
+            $result = $this->userModel->insert($data);
+            if ($result === true) {
+                return true;
             } else {
-                $this->errors[] = "Database error can't insert new user";
-                echo json_encode($this->errors);
-                return;
+                $this->errors[] = "This username or email is registered";
+                return $this->errors;
             }
         }
     }
@@ -66,6 +68,7 @@ class UsersController extends Controller
      */
     public function login($data)
     {
+        $this->errors = [];
         $username = $data["username"];
         /**
          * todo : encrypt the password
@@ -74,8 +77,7 @@ class UsersController extends Controller
 
         if (empty($username) || empty($password)) {
             $this->errors[] = "Empty username or password";
-            echo json_encode($this->errors);
-            return;
+            return $this->errors;
         }
 
         if (!$this->validate_input($this->string_pattern, $username)) {
@@ -83,18 +85,15 @@ class UsersController extends Controller
         }
 
         if (count($this->errors) > 0) {
-            echo json_encode($this->errors);
-            return;
+            return $this->errors;
         }
         $row = $this->userModel->select($data);
         if (count($row) > 0) {
             $_SESSION["user_id"] = $row[0]["user_id"];
-            echo json_encode(true);
-            return;
+            return true;
         } else {
             $this->errors[] = "Enter valid username or password";
-            echo print_r(json_encode($this->errors));
-            return;
+            return $this->errors;
         }
     }
 
