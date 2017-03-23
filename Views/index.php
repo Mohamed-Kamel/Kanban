@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION["user_id"])){
-    header("refresh:0;url=../general.php");
+    header("refresh:0;url=../index.php");
 }
 ?>
 
@@ -271,7 +271,7 @@ if(!isset($_SESSION["user_id"])){
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close close-remove-error" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">You can't move this task.</h4>
+                        <h4 class="modal-title">You can move one step only !!</h4>
                     </div>
                 </div>
             </div>
